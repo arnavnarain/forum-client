@@ -1,0 +1,14 @@
+{
+  "resourceName": "s343d60db2",
+  "policyUUID": "43d60db2",
+  "bucketName": "forumclientcbd0e51a6a7e45b39e1e8a1edc89a0db",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
