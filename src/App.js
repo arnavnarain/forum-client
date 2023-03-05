@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import { API, Storage } from 'aws-amplify';
+import { API, Storage, Auth } from 'aws-amplify';
 import {
   Button,
   Flex,
@@ -30,6 +30,50 @@ const App = ({ signOut }) => {
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     setNotes(notesFromAPI);
+  }
+
+  async function fetchData() {
+    const user = await Auth.currentAuthenticatedUser();
+    const session = await Auth.currentSession();
+    const accessToken = session.getAccessToken();
+    const expirationTime = accessToken.getExpiration() * 1000;
+    const now = new Date().getTime();
+    
+    // Check if the access token has expired or will expire in the next 5 minutes
+    if (expirationTime < now + 5 * 60 * 1000) {
+      // Refresh the token if necessary
+      const refreshedSession = await Auth.currentSession({ 
+        refreshToken: user.signInUserSession.refreshToken 
+      });
+      const newAccessToken = refreshedSession.getAccessToken();
+      const token = newAccessToken.getJwtToken();
+      
+      // Use the new token to make authenticated API calls
+      const response = await fetch('https://7iz65zchcbhbfd4eew2h3kmcce.appsync-api.us-east-1.amazonaws.com/graphql', {
+        method: 'GET',
+        headers: {
+          Authorization: token,
+        },
+      });
+      
+      // Process the API response
+      const data = await response.json();
+      console.log(data);
+      
+    } else {
+      // Use the existing token to make authenticated API calls
+      const token = accessToken.getJwtToken();
+      
+      // Use the token to make authenticated API calls
+      const response = await fetch('https://7iz65zchcbhbfd4eew2h3kmcce.appsync-api.us-east-1.amazonaws.com/graphql', {
+        method: 'GET',
+        headers: {
+          Authorization: token,
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+    }
   }
 
   async function createNote(event) {
@@ -74,6 +118,8 @@ const App = ({ signOut }) => {
     );
     setNotes(notesFromAPI);
   }
+
+  fetchData();
 
   return (
     <View className="App">
