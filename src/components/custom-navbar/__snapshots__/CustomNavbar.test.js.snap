@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`(Snapshot) Default (Snapshot) Default 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-expand-md navbar-light bg-light sticky-top"
+  >
+    <div
+      class="container"
+    >
+      <a
+        class="navbar-brand"
+        href="/home"
+      >
+        Bulletin Board
+      </a>
+      <button
+        aria-controls="basic-navbar-nav"
+        aria-label="Toggle navigation"
+        class="navbar-toggler collapsed"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="navbar-collapse collapse"
+        id="basic-navbar-nav"
+      >
+        <div
+          class="me-auto navbar-nav"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/home"
+            href="/home"
+          >
+            Home
+          </a>
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/about"
+            href="/about"
+          >
+            About
+          </a>
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/popular"
+            href="/popular"
+          >
+            Popular
+          </a>
+        </div>
+      </div>
+      <div
+        class="dropdown navbar-collapse collapse"
+        id="basic-navbar-nav"
+      >
+        <div
+          class="nav-item dropdown"
+        >
+          <a
+            aria-expanded="false"
+            class="dropdown-toggle nav-link"
+            href="#"
+            id="basic-nav-dropdown"
+            role="button"
+            tabindex="0"
+          >
+            mocked-username
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

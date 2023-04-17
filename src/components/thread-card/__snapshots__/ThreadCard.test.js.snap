@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Thread Card render test (Snapshot) Default 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-beqWaB jvyYLV"
+  >
+    <h1
+      class="heading heading"
+    >
+       Sample Title 
+    </h1>
+    <p
+      class="body body"
+    >
+       Sample content 
+    </p>
+  </div>
+</DocumentFragment>
+`;
