@@ -15,9 +15,12 @@ import {
 } from "../../graphql/mutations";
 
 import { ThreadCard } from '../../components/thread-card/ThreadCard'
+import { Auth } from 'aws-amplify';
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
+
+  const username = Auth.user.username;
 
   useEffect(() => {
     fetchNotes();
@@ -31,6 +34,7 @@ const Home = () => {
       name: form.get("name"),
       description: form.get("description"),
       image: image.name,
+      ownerId: username
     };
     if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
@@ -102,7 +106,7 @@ const Home = () => {
       <center>
         <View>
           {notes.map((note) => (
-            <ThreadCard title={note.name} content = {note.description} image = {note.image} />
+            <ThreadCard title={note.name} content = {note.description} image = {note.image} ownerId = {note.ownerId} createdAt = {note.createdAt} />
           ))}
         </View>
       </center>

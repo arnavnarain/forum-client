@@ -7,3 +7,10 @@
     width: 100%;
     text-align: left;
 }
+
+.caption { 
+    @extend .body;
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+    text-align: right; 
+}

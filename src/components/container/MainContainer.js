@@ -10,7 +10,6 @@ export const MainContainer = styled.div`
   backdrop-filter: blur(8.5px);
   -webkit-backdrop-filter: blur(8.5px);
   border-radius: 10px;
-  text-transform: uppercase;
   margin-bottom: 2rem;
   padding: 2rem 2rem 2rem 2rem;
 `;

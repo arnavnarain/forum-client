@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "forumclient",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-04-18T18:55:02.472Z"
 }
