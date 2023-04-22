@@ -18,12 +18,16 @@ export declare type NoteUpdateFormInputValues = {
     description?: string;
     image?: string;
     ownerId?: string;
+    upvotes?: string[];
+    downvotes?: string[];
 };
 export declare type NoteUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
     ownerId?: ValidationFunction<string>;
+    upvotes?: ValidationFunction<string>;
+    downvotes?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NoteUpdateFormOverridesProps = {
@@ -32,6 +36,8 @@ export declare type NoteUpdateFormOverridesProps = {
     description?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
     ownerId?: PrimitiveOverrideProps<TextFieldProps>;
+    upvotes?: PrimitiveOverrideProps<TextFieldProps>;
+    downvotes?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteUpdateFormProps = React.PropsWithChildren<{
     overrides?: NoteUpdateFormOverridesProps | undefined | null;

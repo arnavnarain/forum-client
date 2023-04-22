@@ -34,7 +34,9 @@ const Home = () => {
       name: form.get("name"),
       description: form.get("description"),
       image: image.name,
-      ownerId: username
+      ownerId: username,
+      upvotes: [],
+      downvotes: []
     };
     if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
@@ -106,7 +108,7 @@ const Home = () => {
       <center>
         <View>
           {notes.map((note) => (
-            <ThreadCard title={note.name} content = {note.description} image = {note.image} ownerId = {note.ownerId} createdAt = {note.createdAt} />
+            <ThreadCard title={note.name} content = {note.description} image = {note.image} ownerId = {note.ownerId} createdAt = {note.createdAt} upvotes={note.upvotes} id={note.id} downvotes={note.downvotes} />
           ))}
         </View>
       </center>

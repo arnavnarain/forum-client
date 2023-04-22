@@ -1,16 +1,40 @@
-.heading { 
+.heading {
     width: 100%;
     text-align: left;
 }
 
-.body { 
+.body {
     width: 100%;
     text-align: left;
 }
 
-.caption { 
+.caption {
     @extend .body;
     margin-top: 2rem;
     margin-bottom: 0rem;
-    text-align: right; 
+    text-align: right;
+}
+
+.voteCol {
+    float: left;
+    width: 15%;
+    height: 100%;
+    padding-right: 1rem;
+    .voteIcon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 0.5rem;
+    }
+
+    .voteIcon:hover {
+        cursor: pointer;
+    }
+}
+
+.contentCol { 
+    float: right;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }

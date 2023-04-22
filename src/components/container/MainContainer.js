@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 export const MainContainer = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
   height: 100%;
   width: 70vh;
   background: rgba(255, 255, 255, 0.75);
@@ -11,7 +10,7 @@ export const MainContainer = styled.div`
   -webkit-backdrop-filter: blur(8.5px);
   border-radius: 10px;
   margin-bottom: 2rem;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 2rem 2rem 2rem 1rem;
 `;
 
 export const Button = styled.button`
