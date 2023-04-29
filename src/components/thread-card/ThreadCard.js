@@ -14,35 +14,42 @@ import { updateNote } from '../../graphql/mutations';
 
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const ThreadCard = (props) => {
-    const { id, title, content, image, ownerId, createdAt, upvotes, downvotes } = props;
+
+    const { note, compressed } = props; 
+    const { id, name: title, description: content, ownerId, createdAt, upvotes, downvotes } = note;
+    const navigate = useNavigate()
+
     let date = moment(createdAt);
     date = date.format('MMMM D, YYYY [at] h:mm A');
 
     const userId = Auth.user.attributes.sub;
-    console.log(Auth.user.attributes.sub);
 
     const [totalVotes, setTotalVotes] = useState(upvotes.length - downvotes.length);
     const [upvoteActive, setUpvoteActive] = useState(upvotes.includes(userId));
     const [downvoteActive, setDownvoteActive] = useState(downvotes.includes(userId))
 
+    const navigateToThread = () => { 
+        navigate(`/r/${note.id}?search=${note.id}`);
+    }
     async function addUpvote(noteId, userId) {
         try {
-            if(!downvoteActive) { 
+            if (!downvoteActive) {
                 const result = await API.graphql(graphqlOperation(updateNote, {
                     input: {
                         id: noteId,
                         upvotes: upvoteActive ? upvotes.filter((id) => id !== userId) : [...upvotes, userId]
                     }
                 }));
-        
-            if (upvoteActive) {
-                setTotalVotes(totalVotes - 1);
-            } else {
-                setTotalVotes(totalVotes + 1);
-            }
 
-            setUpvoteActive(!upvoteActive);
+                if (upvoteActive) {
+                    setTotalVotes(totalVotes - 1);
+                } else {
+                    setTotalVotes(totalVotes + 1);
+                }
+
+                setUpvoteActive(!upvoteActive);
             }
         } catch (error) {
             console.log(error);
@@ -71,9 +78,8 @@ const ThreadCard = (props) => {
         }
     }
 
-
     return (
-        <MainContainer>
+        <MainContainer onClick={navigateToThread} className="mainContainer">
             <div className="voteCol">
                 <ImageIcon src={upvoteActive ? FilledUpvote : EmptyUpvote} onClick={() => addUpvote(id, userId)} customContainerClass="voteIcon" />
                 <b> {totalVotes} </b>
@@ -82,11 +88,14 @@ const ThreadCard = (props) => {
             <div className="contentCol">
                 <Heading className="heading"> {title} </Heading>
                 <BodyText className="body"> {content} </BodyText>
-                {image && (<Image
-                    src={image}
-                    alt={`visual aid for ${title}`}
-                    style={{ width: 400 }}
-                />)}
+                <div style={compressed ? { width: 400, maxHeight: 400, overflow: "hidden" } : {}}>
+                    {note.image && (
+                        <Image
+                        src={note.image}
+                        alt={`No image for ${title}`}
+                        style={{ width: "100%", height: "auto" }}/>
+                    )}
+                </div>
                 <BodyText className="caption"> Created by {ownerId ? ownerId : 'Default'} on {date} </BodyText>
             </div>
 

@@ -21,7 +21,7 @@ const CustomNavbar = (props) => {
         </Navbar.Collapse>
         <Navbar.Collapse id="basic-navbar-nav" className={"dropdown"}>
           <NavDropdown title={username} id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/myprofile">My Profile</NavDropdown.Item>
             <NavDropdown.Item onClick={props.signOut}>Sign out</NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>

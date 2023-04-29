@@ -14,6 +14,8 @@ export const createNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }
@@ -32,6 +34,8 @@ export const updateNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }
@@ -50,6 +54,8 @@ export const deleteNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }

@@ -11,6 +11,8 @@ export const getNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }
@@ -31,6 +33,8 @@ export const listNotes = /* GraphQL */ `
         ownerId
         upvotes
         downvotes
+        comments
+        users
         createdAt
         updatedAt
       }

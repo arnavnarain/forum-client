@@ -11,6 +11,8 @@ export const onCreateNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }
@@ -26,6 +28,8 @@ export const onUpdateNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }
@@ -41,6 +45,8 @@ export const onDeleteNote = /* GraphQL */ `
       ownerId
       upvotes
       downvotes
+      comments
+      users
       createdAt
       updatedAt
     }

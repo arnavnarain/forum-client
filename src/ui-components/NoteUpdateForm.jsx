@@ -199,6 +199,8 @@ export default function NoteUpdateForm(props) {
     ownerId: "",
     upvotes: [],
     downvotes: [],
+    comments: [],
+    users: [],
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
@@ -208,6 +210,8 @@ export default function NoteUpdateForm(props) {
   const [ownerId, setOwnerId] = React.useState(initialValues.ownerId);
   const [upvotes, setUpvotes] = React.useState(initialValues.upvotes);
   const [downvotes, setDownvotes] = React.useState(initialValues.downvotes);
+  const [comments, setComments] = React.useState(initialValues.comments);
+  const [users, setUsers] = React.useState(initialValues.users);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
@@ -221,6 +225,10 @@ export default function NoteUpdateForm(props) {
     setCurrentUpvotesValue("");
     setDownvotes(cleanValues.downvotes ?? []);
     setCurrentDownvotesValue("");
+    setComments(cleanValues.comments ?? []);
+    setCurrentCommentsValue("");
+    setUsers(cleanValues.users ?? []);
+    setCurrentUsersValue("");
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -238,6 +246,10 @@ export default function NoteUpdateForm(props) {
   const upvotesRef = React.createRef();
   const [currentDownvotesValue, setCurrentDownvotesValue] = React.useState("");
   const downvotesRef = React.createRef();
+  const [currentCommentsValue, setCurrentCommentsValue] = React.useState("");
+  const commentsRef = React.createRef();
+  const [currentUsersValue, setCurrentUsersValue] = React.useState("");
+  const usersRef = React.createRef();
   const validations = {
     name: [{ type: "Required" }],
     description: [],
@@ -245,6 +257,8 @@ export default function NoteUpdateForm(props) {
     ownerId: [],
     upvotes: [{ type: "Required" }],
     downvotes: [{ type: "Required" }],
+    comments: [{ type: "Required" }],
+    users: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -278,6 +292,8 @@ export default function NoteUpdateForm(props) {
           ownerId,
           upvotes,
           downvotes,
+          comments,
+          users,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -339,6 +355,8 @@ export default function NoteUpdateForm(props) {
               ownerId,
               upvotes,
               downvotes,
+              comments,
+              users,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -368,6 +386,8 @@ export default function NoteUpdateForm(props) {
               ownerId,
               upvotes,
               downvotes,
+              comments,
+              users,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -397,6 +417,8 @@ export default function NoteUpdateForm(props) {
               ownerId,
               upvotes,
               downvotes,
+              comments,
+              users,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -426,6 +448,8 @@ export default function NoteUpdateForm(props) {
               ownerId: value,
               upvotes,
               downvotes,
+              comments,
+              users,
             };
             const result = onChange(modelFields);
             value = result?.ownerId ?? value;
@@ -451,6 +475,8 @@ export default function NoteUpdateForm(props) {
               ownerId,
               upvotes: values,
               downvotes,
+              comments,
+              users,
             };
             const result = onChange(modelFields);
             values = result?.upvotes ?? values;
@@ -498,6 +524,8 @@ export default function NoteUpdateForm(props) {
               ownerId,
               upvotes,
               downvotes: values,
+              comments,
+              users,
             };
             const result = onChange(modelFields);
             values = result?.downvotes ?? values;
@@ -532,6 +560,104 @@ export default function NoteUpdateForm(props) {
           ref={downvotesRef}
           labelHidden={true}
           {...getOverrideProps(overrides, "downvotes")}
+        ></TextField>
+      </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              image,
+              ownerId,
+              upvotes,
+              downvotes,
+              comments: values,
+              users,
+            };
+            const result = onChange(modelFields);
+            values = result?.comments ?? values;
+          }
+          setComments(values);
+          setCurrentCommentsValue("");
+        }}
+        currentFieldValue={currentCommentsValue}
+        label={"Comments"}
+        items={comments}
+        hasError={errors?.comments?.hasError}
+        errorMessage={errors?.comments?.errorMessage}
+        setFieldValue={setCurrentCommentsValue}
+        inputFieldRef={commentsRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Comments"
+          isRequired={true}
+          isReadOnly={false}
+          value={currentCommentsValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.comments?.hasError) {
+              runValidationTasks("comments", value);
+            }
+            setCurrentCommentsValue(value);
+          }}
+          onBlur={() => runValidationTasks("comments", currentCommentsValue)}
+          errorMessage={errors.comments?.errorMessage}
+          hasError={errors.comments?.hasError}
+          ref={commentsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "comments")}
+        ></TextField>
+      </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              image,
+              ownerId,
+              upvotes,
+              downvotes,
+              comments,
+              users: values,
+            };
+            const result = onChange(modelFields);
+            values = result?.users ?? values;
+          }
+          setUsers(values);
+          setCurrentUsersValue("");
+        }}
+        currentFieldValue={currentUsersValue}
+        label={"Users"}
+        items={users}
+        hasError={errors?.users?.hasError}
+        errorMessage={errors?.users?.errorMessage}
+        setFieldValue={setCurrentUsersValue}
+        inputFieldRef={usersRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Users"
+          isRequired={true}
+          isReadOnly={false}
+          value={currentUsersValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.users?.hasError) {
+              runValidationTasks("users", value);
+            }
+            setCurrentUsersValue(value);
+          }}
+          onBlur={() => runValidationTasks("users", currentUsersValue)}
+          errorMessage={errors.users?.errorMessage}
+          hasError={errors.users?.hasError}
+          ref={usersRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "users")}
         ></TextField>
       </ArrayField>
       <Flex
