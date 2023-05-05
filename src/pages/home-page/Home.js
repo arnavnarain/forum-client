@@ -30,8 +30,6 @@ const Home = () => {
     event.preventDefault();
     const form = new FormData(event.target);
     const image = form.get("image");
-    console.log(image);
-    console.log("TEST");
     const data = {
       name: form.get("name"),
       description: form.get("description"),

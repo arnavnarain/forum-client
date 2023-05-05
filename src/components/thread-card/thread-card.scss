@@ -3,13 +3,13 @@
     text-align: left;
 }
 
-.body {
+.bodyTitle {
     width: 100%;
     text-align: left;
 }
 
 .caption {
-    @extend .body;
+    @extend .bodyTitle;
     margin-top: 2rem;
     margin-bottom: 0rem;
     text-align: right;

@@ -79,15 +79,15 @@ const ThreadCard = (props) => {
     }
 
     return (
-        <MainContainer onClick={navigateToThread} className="mainContainer">
+        <MainContainer className="mainContainer">
             <div className="voteCol">
                 <ImageIcon src={upvoteActive ? FilledUpvote : EmptyUpvote} onClick={() => addUpvote(id, userId)} customContainerClass="voteIcon" />
                 <b> {totalVotes} </b>
                 <ImageIcon src={downvoteActive ? FilledDownvote : EmptyDownvote} onClick={() => addDownvote(id, userId)} customContainerClass="voteIcon" />
             </div>
-            <div className="contentCol">
+            <div onClick={navigateToThread} className="contentCol">
                 <Heading className="heading"> {title} </Heading>
-                <BodyText className="body"> {content} </BodyText>
+                <BodyText className="bodyTitle"> {content} </BodyText>
                 <div style={compressed ? { width: 400, maxHeight: 400, overflow: "hidden" } : {}}>
                     {note.image && (
                         <Image

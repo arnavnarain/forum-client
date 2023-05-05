@@ -1,0 +1,22 @@
+.addText { 
+    text-align: left;
+}
+.mainContainer { 
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fieldContainer { 
+    flex-direction: column;
+    flex: 1;
+}
+
+.contentContainer { 
+    flex-direction: row;
+}
+
+.profilePicture { 
+    flex: 1;
+}

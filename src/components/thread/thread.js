@@ -19,7 +19,6 @@ const Thread = () => {
     const [comments, setComments] = useState([]);
 
     async function createNewComment(username, content, noteId) {
-        console.log("START");
         try {
 
             const result = await API.graphql(graphqlOperation(updateNote, {
@@ -66,7 +65,6 @@ const Thread = () => {
             }
         };
 
-        console.log(note);
         fetchNote();
     }, [noteId]);
 

@@ -6,7 +6,7 @@ import {
 } from '@aws-amplify/ui-react';
 import { About } from "./pages/About"
 import { Home } from "./pages/home-page/Home"
-import { Popular } from "./pages/Popular"
+import { Popular } from "./pages/popular/Popular"
 import { CustomNavbar as Navbar } from './components/custom-navbar/CustomNavbar';
 import { Thread } from './components/thread/thread';
 import { MyProfile } from './pages/my-profile/MyProfile';

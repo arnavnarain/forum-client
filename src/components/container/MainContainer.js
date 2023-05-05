@@ -30,3 +30,17 @@ export const Button = styled.button`
     color: white;
   `}
 `;
+
+export const CommentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 70vh;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+`;
