@@ -1,5 +1,19 @@
 {
   "api": {
+    "TwitterOAuth": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "TwitterOAuth"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "forumclient": {
       "dependsOn": [
         {
@@ -60,6 +74,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "TwitterOAuth": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_TwitterOAuth_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "TwitterOAuth"
+        }
+      ]
+    },
+    "AMPLIFY_function_TwitterOAuth_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "TwitterOAuth"
+        }
+      ]
     }
   },
   "storage": {

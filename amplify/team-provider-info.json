@@ -16,10 +16,17 @@
         "forumclient0b407399": {}
       },
       "api": {
-        "forumclient": {}
+        "forumclient": {},
+        "TwitterOAuth": {}
       },
       "storage": {
         "s343d60db2": {}
+      },
+      "function": {
+        "TwitterOAuth": {
+          "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
+          "s3Key": "amplify-builds/TwitterOAuth-6d5731664d7950476952-build.zip"
+        }
       }
     }
   }
