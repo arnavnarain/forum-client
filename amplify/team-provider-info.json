@@ -25,7 +25,11 @@
       "function": {
         "TwitterOAuth": {
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
-          "s3Key": "amplify-builds/TwitterOAuth-6d5731664d7950476952-build.zip"
+          "s3Key": "amplify-builds/TwitterOAuth-6d77446f6457635a6f66-build.zip"
+        },
+        "TwitterAuthenticate": {
+          "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
+          "s3Key": "amplify-builds/TwitterAuthenticate-2b756f4c716d312f7731-build.zip"
         }
       }
     }

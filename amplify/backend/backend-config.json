@@ -77,6 +77,11 @@
     }
   },
   "function": {
+    "TwitterAuthenticate": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "TwitterOAuth": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -84,6 +89,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_TwitterAuthenticate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "TwitterAuthenticate"
+        }
+      ]
+    },
+    "AMPLIFY_function_TwitterAuthenticate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "TwitterAuthenticate"
+        }
+      ]
+    },
     "AMPLIFY_function_TwitterOAuth_deploymentBucketName": {
       "usedBy": [
         {

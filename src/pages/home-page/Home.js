@@ -16,6 +16,21 @@ import {
 
 import { ThreadCard } from '../../components/thread-card/ThreadCard'
 import { Auth } from 'aws-amplify';
+var AWS = require('aws-sdk')
+
+AWS.config.update({accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY});
+AWS.config.update({ region: 'us-east-1'})
+const TwitterOAuth = () => { 
+  var lambda = new AWS.Lambda()
+  var params = { 
+    FunctionName: 'TwitterAuthenticate-staging',
+  }
+  lambda.invoke(params, function(err, data) { 
+    if (err) console.log(err, err.stack);
+    else console.log(data);
+  });
+}
+
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
@@ -74,46 +89,50 @@ const Home = () => {
   }
 
   return (
-    <View className="App">
-      <Heading level={1}>Bulletin Board</Heading>
-      <View as="form" margin="3rem 0" onSubmit={createNote}>
-        <Flex direction="row" justifyContent="center">
-          <TextField
-            name="name"
-            placeholder="Title"
-            label="Note Name"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <TextField
-            name="description"
-            placeholder="Description"
-            label="Note Description"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <View
-            name="image"
-            as="input"
-            type="file"
-            style={{ alignSelf: "end" }}
-          />
-          <Button type="submit" variation="primary">
-            Create Thread
-          </Button>
-        </Flex>
-      </View>
-      <Heading level={2}>Threads</Heading>
-      <center>
-        <View>
-          {notes.map((note) => (
-            <ThreadCard note={note} compressed={true} />
-          ))}
+    <>
+      <Button onClick={TwitterOAuth}> Click me! </Button>
+      <View className="App">
+        <Heading level={1}>Bulletin Board</Heading>
+        <View as="form" margin="3rem 0" onSubmit={createNote}>
+          <Flex direction="row" justifyContent="center">
+            <TextField
+              name="name"
+              placeholder="Title"
+              label="Note Name"
+              labelHidden
+              variation="quiet"
+              required
+            />
+            <TextField
+              name="description"
+              placeholder="Description"
+              label="Note Description"
+              labelHidden
+              variation="quiet"
+              required
+            />
+            <View
+              name="image"
+              as="input"
+              type="file"
+              style={{ alignSelf: "end" }}
+            />
+            <Button type="submit" variation="primary">
+              Create Thread
+            </Button>
+          </Flex>
         </View>
-      </center>
-    </View>);
+        <Heading level={2}>Threads</Heading>
+        <center>
+          <View>
+            {notes.map((note) => (
+              <ThreadCard note={note} compressed={true} />
+            ))}
+          </View>
+        </center>
+      </View>
+    </>
+    );
 }
 
 export { Home } 

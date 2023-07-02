@@ -14,21 +14,19 @@ const callbackURL = 'http://127.0.0.1:3000/'
  * Will succeed with the response body.
  */
 exports.handler = async (event) => {
+  console.log(event)
   try {
-    const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(callbackURL, {
-      scope: ['tweet.read', 'tweet.write', 'users.read']
-    });
+    // const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(callbackURL, {
+    //   scope: ['tweet.read', 'tweet.write', 'users.read']
+    // });
 
-    console.log(codeVerifier);
-    console.log(state);
-    console.log(url);
+    // console.log(codeVerifier);
+    // console.log(state);
+    // console.log(url);
 
     const response = {
-      statusCode: 302, // Redirect status code
-      headers: {
-        Location: url,
-      },
-      body: '',
+      statusCode: 200,
+      body: JSON.stringify("Hello from Labda!"),
     };
 
     return response;
