@@ -22,9 +22,12 @@ const Home = ( props ) => {
   const [notes, setNotes] = useState([]);
 
   var AWS = require('aws-sdk')
-  console.log(process.env.REACT_APP_ACCESS_KEY_ID.trim())
-  console.log(process.env.REACT_APP_SECRET_ACCESS_KEY.trim())
-  AWS.config.update({ accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID.trim(), secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY.trim() });
+
+  const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
+  const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
+  console.log(accessKeyId)
+  console.log(secretAccessKey)
+  AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
   AWS.config.update({ region: 'us-east-1' })
 
   useEffect(() => { 

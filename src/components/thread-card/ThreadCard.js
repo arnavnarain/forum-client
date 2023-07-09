@@ -20,7 +20,11 @@ const ThreadCard = (props) => {
     const { id, name: title, description: content, ownerId, createdAt, upvotes, downvotes } = note;
 
     var AWS = require('aws-sdk')
-    AWS.config.update({ accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY });
+    const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
+    const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
+    console.log(accessKeyId)
+    console.log(secretAccessKey)
+    AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
     AWS.config.update({ region: 'us-east-1' })
 
     const TwitterOAuth = () => {
