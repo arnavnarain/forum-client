@@ -16,24 +16,51 @@ import {
 
 import { ThreadCard } from '../../components/thread-card/ThreadCard'
 import { Auth } from 'aws-amplify';
-var AWS = require('aws-sdk')
 
-AWS.config.update({accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY});
-AWS.config.update({ region: 'us-east-1'})
-const TwitterOAuth = () => { 
-  var lambda = new AWS.Lambda()
-  var params = { 
-    FunctionName: 'TwitterAuthenticate-staging',
-  }
-  lambda.invoke(params, function(err, data) { 
-    if (err) console.log(err, err.stack);
-    else console.log(data);
-  });
-}
-
-
-const Home = () => {
+const Home = ( props ) => {
+  const { OAuthCallback } = props;
   const [notes, setNotes] = useState([]);
+
+  var AWS = require('aws-sdk')
+  console.log(process.env.REACT_APP_ACCESS_KEY_ID)
+  console.log(process.env.REACT_APP_SECRET_ACCESS_KEY)
+  AWS.config.update({ accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY });
+  AWS.config.update({ region: 'us-east-1' })
+
+  useEffect(() => { 
+    if (OAuthCallback) { 
+      console.log("TEST")
+      console.log(OAuthCallback)
+      const searchParams = new URLSearchParams(window.location.search)
+      const verifyState = searchParams.get('state');
+      const verifyCode = searchParams.get('code');
+      console.log(verifyState)
+      console.log(verifyCode)
+      console.log(sessionStorage.getItem('codeVerifier'))
+      console.log(sessionStorage.getItem('state'))
+  
+      var lambda = new AWS.Lambda()
+      var params = {
+          FunctionName: 'OAuthCallback-staging',
+          Payload: JSON.stringify({
+            verifyState: verifyState,
+            verifyCode: verifyCode,
+            state: sessionStorage.getItem('state'),
+            codeVerifier: sessionStorage.getItem('codeVerifier'),
+            body: sessionStorage.getItem('body'),
+            image: sessionStorage.getItem('image')
+          })
+      }
+
+      lambda.invoke(params, (err, data) => { 
+        if (err) {
+          console.log('fail')
+        } else { 
+          console.log('success')
+          console.log(data)
+        }
+      });
+    }}, [])
 
   const username = Auth.user.username;
 
@@ -90,7 +117,6 @@ const Home = () => {
 
   return (
     <>
-      <Button onClick={TwitterOAuth}> Click me! </Button>
       <View className="App">
         <Heading level={1}>Bulletin Board</Heading>
         <View as="form" margin="3rem 0" onSubmit={createNote}>

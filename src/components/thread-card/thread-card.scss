@@ -17,6 +17,7 @@
 
 .mainContainer { 
     cursor: pointer;
+
 }
 
 .voteCol {
@@ -42,3 +43,36 @@
     justify-content: center;
     height: 100%;
 }
+
+
+
+.twitter-button {
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #1da1f2;
+    color: #fff;
+    padding: 1px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    align-self: right; 
+    width: 150px;
+  }
+
+  
+  .twitter-button:hover {
+    background-color: #0c86d1;
+  }
+  
+  .twitter-button .twitter-logo {
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    background-image: url('../../assets/icons/twitter-logo.png'); 
+    background-size: cover;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  .imageStyle { 
+    max-width: 400px; 
+  }

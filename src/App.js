@@ -20,9 +20,10 @@ const App = ({ signOut }) => {
           <Routes> 
             <Route path="/about" element={<About />} />
             <Route path="/popular" element={<Popular />} />
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<Home OAuthCallback={false} />} />
             <Route path="/r/:threadName" element={<Thread />} />
             <Route path="/myprofile" element={<MyProfile />} />
+            <Route path="/oauth-callback" element={<Home OAuthCallback={true} />} />
           </Routes>  
       </Router> 
     </div>

@@ -77,6 +77,11 @@
     }
   },
   "function": {
+    "OAuthCallback": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "TwitterAuthenticate": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -89,6 +94,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_OAuthCallback_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "OAuthCallback"
+        }
+      ]
+    },
+    "AMPLIFY_function_OAuthCallback_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "OAuthCallback"
+        }
+      ]
+    },
     "AMPLIFY_function_TwitterAuthenticate_deploymentBucketName": {
       "usedBy": [
         {

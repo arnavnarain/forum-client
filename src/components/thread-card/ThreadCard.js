@@ -16,9 +16,37 @@ import { updateNote } from '../../graphql/mutations';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 const ThreadCard = (props) => {
-
-    const { note, compressed } = props; 
+    const { note, compressed } = props;
     const { id, name: title, description: content, ownerId, createdAt, upvotes, downvotes } = note;
+
+    var AWS = require('aws-sdk')
+    AWS.config.update({ accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID, secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY });
+    AWS.config.update({ region: 'us-east-1' })
+
+    const TwitterOAuth = () => {
+
+        var lambda = new AWS.Lambda()
+        var params = {
+            FunctionName: 'TwitterAuthenticate-staging',
+        }
+
+        lambda.invoke(params, function (err, data) {
+            if (err) {
+                console.log(err, err.stack);
+            } else {
+                const body = JSON.parse(data.Payload)
+                const res = JSON.parse(body.body)
+                console.log("TESTing")
+                sessionStorage.setItem('codeVerifier', res.codeVerifier)
+                sessionStorage.setItem('state', res.state)
+                sessionStorage.setItem('body', content)
+                sessionStorage.setItem('image', note.image)
+                console.log(sessionStorage.getItem('codeVerifier'))
+                console.log(sessionStorage.getItem('state'))
+                window.location.replace(res.authLink)
+            }
+        });
+    }
     const navigate = useNavigate()
 
     let date = moment(createdAt);
@@ -30,7 +58,7 @@ const ThreadCard = (props) => {
     const [upvoteActive, setUpvoteActive] = useState(upvotes.includes(userId));
     const [downvoteActive, setDownvoteActive] = useState(downvotes.includes(userId))
 
-    const navigateToThread = () => { 
+    const navigateToThread = () => {
         navigate(`/r/${note.id}?search=${note.id}`);
     }
     async function addUpvote(noteId, userId) {
@@ -91,12 +119,16 @@ const ThreadCard = (props) => {
                 <div style={compressed ? { width: 400, maxHeight: 400, overflow: "hidden" } : {}}>
                     {note.image && (
                         <Image
-                        src={note.image}
-                        alt={`No image for ${title}`}
-                        style={{ width: "100%", height: "auto" }}/>
+                            src={note.image}
+                            alt={`No image for ${title}`}
+                            style={{ width: "100%", height: "auto" }} />
                     )}
                 </div>
                 <BodyText className="caption"> Created by {ownerId ? ownerId : 'Default'} on {date} </BodyText>
+                <a className="twitter-button" onClick={TwitterOAuth}>
+                    Tweet
+                    <span className="twitter-logo"></span>
+                </a>
             </div>
 
         </MainContainer>
