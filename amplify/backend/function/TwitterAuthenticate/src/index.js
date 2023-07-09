@@ -9,15 +9,10 @@ const callbackURL = 'http://127.0.0.1:3000/'
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 exports.handler = async (event) => {
-    console.log(event)
     try {
       const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(callbackURL, {
         scope: ['tweet.read', 'tweet.write', 'users.read']
       });
-  
-      console.log(codeVerifier);
-      console.log(state);
-      console.log(url);
   
       const response = {
         statusCode: 200,

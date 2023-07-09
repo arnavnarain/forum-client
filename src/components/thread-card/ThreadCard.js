@@ -20,14 +20,12 @@ const ThreadCard = (props) => {
     const { id, name: title, description: content, ownerId, createdAt, upvotes, downvotes } = note;
 
     var AWS = require('aws-sdk')
-    const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
-    const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
-    console.log(accessKeyId)
-    console.log(secretAccessKey)
-    AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
-    AWS.config.update({ region: 'us-east-1' })
 
     const TwitterOAuth = () => {
+        const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
+        const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
+        AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
+        AWS.config.update({ region: 'us-east-1' })
 
         var lambda = new AWS.Lambda()
         var params = {
@@ -40,13 +38,9 @@ const ThreadCard = (props) => {
             } else {
                 const body = JSON.parse(data.Payload)
                 const res = JSON.parse(body.body)
-                console.log("TESTing")
                 sessionStorage.setItem('codeVerifier', res.codeVerifier)
                 sessionStorage.setItem('state', res.state)
                 sessionStorage.setItem('body', content)
-                sessionStorage.setItem('image', note.image)
-                console.log(sessionStorage.getItem('codeVerifier'))
-                console.log(sessionStorage.getItem('state'))
                 window.location.replace(res.authLink)
             }
         });

@@ -25,14 +25,11 @@ const Home = ( props ) => {
 
   const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
   const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
-  console.log(accessKeyId)
-  console.log(secretAccessKey)
   AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
   AWS.config.update({ region: 'us-east-1' })
 
   useEffect(() => { 
     if (OAuthCallback) { 
-      console.log(OAuthCallback)
       const searchParams = new URLSearchParams(window.location.search)
       const verifyState = searchParams.get('state');
       const verifyCode = searchParams.get('code');
@@ -51,9 +48,8 @@ const Home = ( props ) => {
 
       lambda.invoke(params, (err, data) => { 
         if (err) {
-          console.log('fail')
+          console.log(err)
         } else { 
-          console.log('success')
         }
       });
     }}, [])
