@@ -37,11 +37,10 @@ const ThreadCard = (props) => {
                 console.log(err, err.stack);
             } else {
                 const body = JSON.parse(data.Payload)
-                const res = JSON.parse(body.body)
-                sessionStorage.setItem('codeVerifier', res.codeVerifier)
-                sessionStorage.setItem('state', res.state)
+                sessionStorage.setItem('codeVerifier', body.codeVerifier)
+                sessionStorage.setItem('state', body.state)
                 sessionStorage.setItem('body', content)
-                window.location.replace(res.authLink)
+                window.location.replace(body.url)
             }
         });
     }
