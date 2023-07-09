@@ -36,6 +36,3 @@ To get started with the Forum Client, follow these steps:
 3. Start the development server: `npm start`
 4. Open your browser and visit `http://localhost:3000` to access the Forum Client.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
