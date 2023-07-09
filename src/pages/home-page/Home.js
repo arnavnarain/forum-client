@@ -51,7 +51,6 @@ const Home = ( props ) => {
           console.log('fail')
         } else { 
           console.log('success')
-          console.log(data)
         }
       });
     }}, [])
