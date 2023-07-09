@@ -29,15 +29,10 @@ const Home = ( props ) => {
 
   useEffect(() => { 
     if (OAuthCallback) { 
-      console.log("TEST")
       console.log(OAuthCallback)
       const searchParams = new URLSearchParams(window.location.search)
       const verifyState = searchParams.get('state');
       const verifyCode = searchParams.get('code');
-      console.log(verifyState)
-      console.log(verifyCode)
-      console.log(sessionStorage.getItem('codeVerifier'))
-      console.log(sessionStorage.getItem('state'))
   
       var lambda = new AWS.Lambda()
       var params = {
@@ -47,8 +42,7 @@ const Home = ( props ) => {
             verifyCode: verifyCode,
             state: sessionStorage.getItem('state'),
             codeVerifier: sessionStorage.getItem('codeVerifier'),
-            body: sessionStorage.getItem('body'),
-            image: sessionStorage.getItem('image')
+            body: sessionStorage.getItem('body')
           })
       }
 
