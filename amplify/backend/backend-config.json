@@ -77,6 +77,11 @@
     }
   },
   "function": {
+    "LiveRanking": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "OAuthCallback": {
       "build": true,
       "providerPlugin": "awscloudformation",

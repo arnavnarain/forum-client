@@ -34,7 +34,8 @@
         "OAuthCallback": {
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
           "s3Key": "amplify-builds/OAuthCallback-584d38306e517777384f-build.zip"
-        }
+        },
+        "LiveRanking": {}
       }
     }
   }
