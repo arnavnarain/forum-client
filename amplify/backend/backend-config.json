@@ -99,6 +99,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_LiveRanking_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LiveRanking"
+        }
+      ]
+    },
+    "AMPLIFY_function_LiveRanking_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LiveRanking"
+        }
+      ]
+    },
     "AMPLIFY_function_OAuthCallback_deploymentBucketName": {
       "usedBy": [
         {
