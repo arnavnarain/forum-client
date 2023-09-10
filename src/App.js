@@ -4,7 +4,7 @@ import "./App.css";
 import {
   withAuthenticator,
 } from '@aws-amplify/ui-react';
-import { About } from "./pages/About"
+import { LiveRanking } from "./pages/live-ranking/LiveRanking"
 import { Home } from "./pages/home-page/Home"
 import { Popular } from "./pages/popular/Popular"
 import { CustomNavbar as Navbar } from './components/custom-navbar/CustomNavbar';
@@ -12,13 +12,13 @@ import { Thread } from './components/thread/thread';
 import { MyProfile } from './pages/my-profile/MyProfile';
 const App = ({ signOut }) => {
 
-  document.title="Bulletin Board";
+  document.title="Tennis Connect";
   return (
     <div className="App">
       <Navbar signOut={signOut} />
       <Router> 
           <Routes> 
-            <Route path="/about" element={<About />} />
+            <Route path="/live-ranking" element={<LiveRanking />} />
             <Route path="/popular" element={<Popular />} />
             <Route path="*" element={<Home OAuthCallback={false} />} />
             <Route path="/r/:threadName" element={<Thread />} />

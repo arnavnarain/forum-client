@@ -112,7 +112,7 @@ const Home = ( props ) => {
   return (
     <>
       <View className="App">
-        <Heading level={1}>Bulletin Board</Heading>
+        <Heading level={1}>Tennis Connect</Heading>
         <View as="form" margin="3rem 0" onSubmit={createNote}>
           <Flex direction="row" justifyContent="center">
             <TextField
