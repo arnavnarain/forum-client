@@ -12,7 +12,7 @@ exports[`(Snapshot) Default (Snapshot) Default 1`] = `
         class="navbar-brand"
         href="/home"
       >
-        Bulletin Board
+        Tennis Connect
       </a>
       <button
         aria-controls="basic-navbar-nav"
@@ -40,17 +40,17 @@ exports[`(Snapshot) Default (Snapshot) Default 1`] = `
           </a>
           <a
             class="nav-link"
-            data-rr-ui-event-key="/about"
-            href="/about"
+            data-rr-ui-event-key="/live-ranking"
+            href="/live-ranking"
           >
-            About
+            Live Ranking
           </a>
           <a
             class="nav-link"
-            data-rr-ui-event-key="/popular"
-            href="/popular"
+            data-rr-ui-event-key="/live-matches"
+            href="/live-matches"
           >
-            Popular
+            Live Matches
           </a>
         </div>
       </div>

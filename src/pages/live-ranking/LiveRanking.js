@@ -5,13 +5,13 @@ import './liveranking.scss'
 const axios = require('axios');
 
 const LiveRanking = () => {
-    const [data, setData] = useState([])
+  const [data, setData] = useState([])
+  var AWS = require('aws-sdk')
 
-//   const data = [
-//     { id: 1, name: 'John', age: 30, points: 1000 },
-//     { id: 2, name: 'Jane', age: 25, points: 1000 },
-//     // Add more data here
-//   ];
+  const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
+  const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
+  AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
+  AWS.config.update({ region: 'us-east-1' })
 
   function MyTable({ columns, data }) {
     const {
@@ -91,23 +91,19 @@ const LiveRanking = () => {
   ];
 
   async function getLiveRankings() {
-    const options = {
-      method: 'GET',
-      url: 'https://ultimate-tennis1.p.rapidapi.com/rankings/atp/singles/50/current',
-      headers: {
-        'X-RapidAPI-Key': 'f9aa80a100mshd6542f0bd4ae698p1eb39djsnb64bb94f44b0',
-        'X-RapidAPI-Host': 'ultimate-tennis1.p.rapidapi.com',
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      setData(response.data.data)
-      console.log(response.data)
-      console.log(response.data.data);
-    } catch (error) {
-      console.error(error);
+    var lambda = new AWS.Lambda()
+    var params = {
+      FunctionName: 'LiveRanking-staging'
     }
+
+    lambda.invoke(params, (err, data) => {
+      if (err) {
+        console.log(err)
+      } else {
+        const body = JSON.parse(data.Payload)
+        setData(body.data)
+      }
+    });
   }
 
   useEffect(() => {
@@ -117,7 +113,7 @@ const LiveRanking = () => {
   return (
     <center>
       <Heading className="heading"> ATP Live Rankings </Heading>
-      <MyTable columns={columns} data={data} />
+      {data && <MyTable columns={columns} data={data} />}
     </center>
   );
 };

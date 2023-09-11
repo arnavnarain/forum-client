@@ -16,7 +16,7 @@ const CustomNavbar = (props) => {
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/live-ranking">Live Ranking</Nav.Link>
-            <Nav.Link href="/popular">Popular</Nav.Link>
+            <Nav.Link href="/live-matches">Live Matches</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse id="basic-navbar-nav" className={"dropdown"}>

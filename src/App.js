@@ -6,7 +6,7 @@ import {
 } from '@aws-amplify/ui-react';
 import { LiveRanking } from "./pages/live-ranking/LiveRanking"
 import { Home } from "./pages/home-page/Home"
-import { Popular } from "./pages/popular/Popular"
+import { LiveMatches } from "./pages/live-matches/LiveMatches"
 import { CustomNavbar as Navbar } from './components/custom-navbar/CustomNavbar';
 import { Thread } from './components/thread/thread';
 import { MyProfile } from './pages/my-profile/MyProfile';
@@ -19,7 +19,7 @@ const App = ({ signOut }) => {
       <Router> 
           <Routes> 
             <Route path="/live-ranking" element={<LiveRanking />} />
-            <Route path="/popular" element={<Popular />} />
+            <Route path="/live-matches" element={<LiveMatches />} />
             <Route path="*" element={<Home OAuthCallback={false} />} />
             <Route path="/r/:threadName" element={<Thread />} />
             <Route path="/myprofile" element={<MyProfile />} />

@@ -77,6 +77,11 @@
     }
   },
   "function": {
+    "LiveMatch": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "LiveRanking": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -99,6 +104,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_LiveMatch_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LiveMatch"
+        }
+      ]
+    },
+    "AMPLIFY_function_LiveMatch_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "LiveMatch"
+        }
+      ]
+    },
     "AMPLIFY_function_LiveRanking_deploymentBucketName": {
       "usedBy": [
         {

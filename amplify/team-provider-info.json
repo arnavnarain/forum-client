@@ -29,7 +29,7 @@
         },
         "TwitterAuthenticate": {
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
-          "s3Key": "amplify-builds/TwitterAuthenticate-464d6959724d73303041-build.zip"
+          "s3Key": "amplify-builds/TwitterAuthenticate-7036694a4e6966324e6a-build.zip"
         },
         "OAuthCallback": {
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
@@ -37,7 +37,11 @@
         },
         "LiveRanking": {
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
-          "s3Key": "amplify-builds/LiveRanking-2f587464544336687962-build.zip"
+          "s3Key": "amplify-builds/LiveRanking-7849464d4278594f4f75-build.zip"
+        },
+        "LiveMatch": {
+          "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
+          "s3Key": "amplify-builds/LiveMatch-667a6c506b7054484a47-build.zip"
         }
       }
     }

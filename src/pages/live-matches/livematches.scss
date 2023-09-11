@@ -1,0 +1,20 @@
+/* livematches.scss */
+
+.live-matches-container {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+  }
+  
+  .matches-content {
+    width: 80%; /* Set the container to 80% of the screen width */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Create a two-column layout */
+  }
+
+.game-progress-pair { 
+    width: 40%;
+}
+  
+  /* Add additional styling as needed */
+  
