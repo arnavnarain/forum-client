@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
 import { Heading } from '../../components/heading/Heading'
+import Modal from '../../components/modal/Modal'
 import './liveranking.scss'
-const axios = require('axios');
+
+var AWS = require('aws-sdk');
 
 const LiveRanking = () => {
-  const [data, setData] = useState([])
-  var AWS = require('aws-sdk')
+  const [data, setData] = useState([]);
+  const [selectedPlayer, setSelectedPlayer] = useState(null); // State to track the selected player
+  const [isOpen, setIsOpen] = useState(true); // State to track the modal's visibility
 
   const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
   const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
   AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
-  AWS.config.update({ region: 'us-east-1' })
+  AWS.config.update({ region: 'us-east-1' });
 
-  function MyTable({ columns, data }) {
+ 
+  function MyTable({ columns, data, onRowClick }) {
     const {
       getTableProps,
       getTableBodyProps,
@@ -35,7 +39,7 @@ const LiveRanking = () => {
       >
         <thead
           style={{
-            backgroundColor: '#008000'
+            backgroundColor: '#008000',
           }}
         >
           {headerGroups.map((headerGroup) => (
@@ -58,12 +62,17 @@ const LiveRanking = () => {
           {rows.map((row, index) => {
             const rowStyle = {
               backgroundColor: index % 2 === 0 ? '#fff' : '#f2f2f2',
+              cursor: 'pointer', // Add this line to make the row clickable
             };
 
             prepareRow(row);
 
             return (
-              <tr {...row.getRowProps()} style={rowStyle}>
+              <tr
+                {...row.getRowProps()}
+                style={rowStyle}
+                onClick={() => onRowClick(row.original.Name)} // Pass the player's name when row is clicked
+              >
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
@@ -81,6 +90,7 @@ const LiveRanking = () => {
       </table>
     );
   }
+
 
   const columns = [
     { Header: 'Rank', accessor: 'Rank' },
@@ -112,8 +122,13 @@ const LiveRanking = () => {
 
   return (
     <center>
-      <Heading className="heading"> ATP Live Rankings </Heading>
-      {data && <MyTable columns={columns} data={data} />}
+      <Heading className="heading">ATP Live Rankings</Heading>
+      {data && (
+        <>
+          <MyTable columns={columns} data={data} onRowClick={() => {setIsOpen(true)}} />
+        </>
+      )}
+      {isOpen && <Modal setIsOpen={setIsOpen} playerId={selectedPlayer} />}
     </center>
   );
 };

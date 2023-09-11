@@ -1,0 +1,1 @@
+Code "borrowed" from https://dev.to/franciscomendes10866/how-to-create-a-modal-in-react-3coc
