@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTable } from 'react-table';
+import MatchModal from '../modal-match/MatchModal'
 
 const GameProgressTable = (props) => {
-    const { tournamentTitle, surface, players, score } = props;
+    const { tournamentTitle, surface, players, score, matchId } = props;
+
+    const [isOpen, setIsOpen] = useState(false); // State to track the modal's visibility
 
     const isInteger = (value) => {
         return value !== 'None'
     };
     const integerCount = score.filter(isInteger).length;
-    console.log(integerCount)
-    console.log(score)
     // Data for the top and bottom tables
     const topTableData = React.useMemo(
         () => [
@@ -90,73 +91,76 @@ const GameProgressTable = (props) => {
     });
 
     return (
-        <div style={{ width: '100%', marginTop: '10px' }}>
-            <table
-                {...getTopTableProps()}
-                className="table top-table"
-                style={{ borderCollapse: 'collapse', margin: '0', tableLayout: 'auto' }}
-            >
-                <tbody {...getTopTableBodyProps()}>
-                    {topTableRows.map((row, rowIndex) => {
-                        prepareTopTableRow(row);
-                        return (
-                            <tr
-                                {...row.getRowProps()}
-                                className={rowIndex === 0 ? 'orange-row' : ''} // Add class to the first row
-                            >
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td
-                                            {...cell.getCellProps()}
-                                            style={{
-                                                borderBottom: '1px solid #ccc',
-                                                borderRight: '1px solid #ccc', // Add vertical border
-                                                padding: '8px',
-                                                textAlign: 'left',
-                                                color: rowIndex === 0 ? 'white' : 'black', // White text for the first row
-                                                backgroundColor: rowIndex === 0 ? 'orange' : 'white', // Orange background for the first row
-                                            }}
-                                        >
-                                            {cell.render('Cell')}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <table
-                {...getBottomTableProps()}
-                className="table bottom-table"
-                style={{ borderCollapse: 'collapse', margin: '0', tableLayout: 'auto' }}
-            >
-                <tbody {...getBottomTableBodyProps()}>
-                    {bottomTableRows.map((row) => {
-                        prepareBottomTableRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td
-                                            {...cell.getCellProps()}
-                                            style={{
-                                                borderBottom: '1px solid #ccc',
-                                                borderRight: '1px solid #ccc', // Add vertical border
-                                                padding: '8px',
-                                                textAlign: 'left',
-                                            }}
-                                        >
-                                            {cell.render('Cell')}
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
+        <>
+            <div style={{ width: '100%', marginTop: '10px' }} onClick={() => { setIsOpen(true)}}>
+                <table
+                    {...getTopTableProps()}
+                    className="table top-table"
+                    style={{ borderCollapse: 'collapse', margin: '0', tableLayout: 'auto' }}
+                >
+                    <tbody {...getTopTableBodyProps()}>
+                        {topTableRows.map((row, rowIndex) => {
+                            prepareTopTableRow(row);
+                            return (
+                                <tr
+                                    {...row.getRowProps()}
+                                    className={rowIndex === 0 ? 'orange-row' : ''} // Add class to the first row
+                                >
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td
+                                                {...cell.getCellProps()}
+                                                style={{
+                                                    borderBottom: '1px solid #ccc',
+                                                    borderRight: '1px solid #ccc', // Add vertical border
+                                                    padding: '8px',
+                                                    textAlign: 'left',
+                                                    color: rowIndex === 0 ? 'white' : 'black', // White text for the first row
+                                                    backgroundColor: rowIndex === 0 ? 'orange' : 'white', // Orange background for the first row
+                                                }}
+                                            >
+                                                {cell.render('Cell')}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <table
+                    {...getBottomTableProps()}
+                    className="table bottom-table"
+                    style={{ borderCollapse: 'collapse', margin: '0', tableLayout: 'auto' }}
+                >
+                    <tbody {...getBottomTableBodyProps()}>
+                        {bottomTableRows.map((row) => {
+                            prepareBottomTableRow(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td
+                                                {...cell.getCellProps()}
+                                                style={{
+                                                    borderBottom: '1px solid #ccc',
+                                                    borderRight: '1px solid #ccc', // Add vertical border
+                                                    padding: '8px',
+                                                    textAlign: 'left',
+                                                }}
+                                            >
+                                                {cell.render('Cell')}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+            {isOpen && <MatchModal setIsOpen={setIsOpen} matchId={matchId} />}
+        </>
     );
 };
 

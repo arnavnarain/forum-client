@@ -146,6 +146,22 @@
         }
       ]
     },
+    "AMPLIFY_function_MatchStats_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MatchStats"
+        }
+      ]
+    },
+    "AMPLIFY_function_MatchStats_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MatchStats"
+        }
+      ]
+    },
     "AMPLIFY_function_OAuthCallback_deploymentBucketName": {
       "usedBy": [
         {

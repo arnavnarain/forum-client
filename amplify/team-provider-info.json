@@ -47,7 +47,10 @@
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
           "s3Key": "amplify-builds/PlayerStats-56625a7263314158464d-build.zip"
         },
-        "MatchStats": {}
+        "MatchStats": {
+          "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
+          "s3Key": "amplify-builds/MatchStats-616e7566696a6e554748-build.zip"
+        }
       }
     }
   }

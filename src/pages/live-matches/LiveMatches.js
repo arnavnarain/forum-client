@@ -27,7 +27,6 @@ const LiveMatches = () => {
       } else {
         const body = JSON.parse(data.Payload)
         setMatches(body.data)
-        console.log("TEST")
       }
     });
   }
@@ -58,6 +57,7 @@ const LiveMatches = () => {
                 match["Set5 Player 1"],
                 match["Set5 Player 2"],
               ]}
+              matchId={match.ID}
             />
           </div>
         ))}

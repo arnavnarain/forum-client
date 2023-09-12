@@ -5,7 +5,7 @@ import { RiCloseLine } from "react-icons/ri";
 var AWS = require('aws-sdk');
 
 const MatchModal = ({ setIsOpen, matchId }) => {
-    const [playerData, setPlayerData] = useState([]);
+    const [matchData, setMatchData] = useState([]);
     const contentRef = useRef(null); // Reference to the modal content element
 
     const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
@@ -13,12 +13,12 @@ const MatchModal = ({ setIsOpen, matchId }) => {
     AWS.config.update({ accessKeyId: accessKeyId, secretAccessKey: secretAccessKey });
     AWS.config.update({ region: 'us-east-1' });
 
-    async function getLiveRankings(playerId) {
+    async function getLiveRankings(matchId) {
         var lambda = new AWS.Lambda();
         var params = {
-            FunctionName: 'PlayerStats-staging',
+            FunctionName: 'MatchStats-staging',
             Payload: JSON.stringify({
-                playerId: playerId
+                matchId: matchId
             })
         }
 
@@ -27,9 +27,7 @@ const MatchModal = ({ setIsOpen, matchId }) => {
                 console.log(err);
             } else {
                 const body = JSON.parse(data.Payload);
-                setPlayerData(body.data['0']);
-                console.log(playerId);
-                console.log(playerData);
+                setMatchData(body.data.statistics[0])
             }
         });
     }
@@ -46,27 +44,55 @@ const MatchModal = ({ setIsOpen, matchId }) => {
             <div className={styles.centered}>
                 <div className={styles.modal}>
                     <div className={styles.modalHeader}>
-                        <h5 className={styles.heading}>{playerData?.Name}</h5>
+                        <h5 className={styles.heading}>Match Statistics</h5>
                     </div>
                     <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
                         <RiCloseLine style={{ marginBottom: "-3px" }} />
                     </button>
                     <div className={styles.modalContent} ref={contentRef}>
-                        Age: {playerData?.Age}
-                        <br />
-                        Birthplace: {playerData?.Birthplace}
-                        <br />
-                        Country: {playerData['Flag Code']}
-                        <br />
-                        Coach: {playerData.Coach}
-                        <br />
-                        Play Style: {playerData['Play Style']}
-                        <br />
-                        Career W-L: {playerData['W-L Career']}
-                        <br />
+                        {matchData['P1 name']} Aces : {matchData['Aces P1']}
+                        <br></br>
+                        {matchData['P2 name']} Aces : {matchData['Aces P2']}
+                        <br></br>
+
+                        <br></br>
+
+
+                        {matchData['P1 name']} Tiebreaks : {matchData['Tiebreaks P1']}
+                        <br></br>
+                        {matchData['P2 name']} Tiebreaks : {matchData['Tiebreaks P2']}
+                        <br></br>
+
+                        {matchData['P1 name']} First serve points : {matchData['First serve points P1']}
+                        <br></br>
+                        {matchData['P2 name']} First serve points : {matchData['First serve points P2']}
+                        <br></br>
+
+                        <br></br>
+
+
+                        {matchData['P1 name']} Second serve points : {matchData['Second serve points P1']}
+                        <br></br>
+                        {matchData['P2 name']} Second serve points : {matchData['Second serve points P2']}
+                        <br></br>
+
+                        <br></br>
+
+                        
+                        {matchData['P1 name']} Break points converted : {matchData['Break points converted P1']}
+                        <br></br>
+                        {matchData['P2 name']} Break points converted : {matchData['Break points converted P2']}
+                        <br></br>
+
+                        <br></br>
+
+                        {matchData['P1 name']} Break points saved : {matchData['Break points saved P1']}
+                        <br></br>
+                        {matchData['P2 name']} Break points saved : {matchData['Break points saved P2']}
+                        <br></br>
+
 
                     </div>
-                    <img src={playerData?.Image} alt={playerData?.Name} style={{ width: '50%' }} /> {/* Adjust the width percentage as needed */}
                 </div>
             </div>
         </>
