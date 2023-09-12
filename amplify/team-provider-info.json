@@ -42,7 +42,12 @@
         "LiveMatch": {
           "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
           "s3Key": "amplify-builds/LiveMatch-667a6c506b7054484a47-build.zip"
-        }
+        },
+        "PlayerStats": {
+          "deploymentBucketName": "amplify-amplifye04cd65bd9bf4-staging-33522-deployment",
+          "s3Key": "amplify-builds/PlayerStats-56625a7263314158464d-build.zip"
+        },
+        "MatchStats": {}
       }
     }
   }

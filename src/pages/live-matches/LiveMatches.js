@@ -27,6 +27,7 @@ const LiveMatches = () => {
       } else {
         const body = JSON.parse(data.Payload)
         setMatches(body.data)
+        console.log("TEST")
       }
     });
   }

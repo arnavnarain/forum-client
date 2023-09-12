@@ -44,6 +44,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "PlayerStats": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "TwitterAuthenticate": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

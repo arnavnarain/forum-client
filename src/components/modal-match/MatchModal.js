@@ -4,7 +4,7 @@ import { RiCloseLine } from "react-icons/ri";
 
 var AWS = require('aws-sdk');
 
-const Modal = ({ setIsOpen, playerId }) => {
+const MatchModal = ({ setIsOpen, matchId }) => {
     const [playerData, setPlayerData] = useState([]);
     const contentRef = useRef(null); // Reference to the modal content element
 
@@ -35,7 +35,7 @@ const Modal = ({ setIsOpen, playerId }) => {
     }
 
     useEffect(() => {
-        getLiveRankings(playerId);
+        getLiveRankings(matchId);
     }, []);
 
 
@@ -73,4 +73,4 @@ const Modal = ({ setIsOpen, playerId }) => {
     );
 };
 
-export default Modal;
+export default MatchModal;

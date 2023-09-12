@@ -87,7 +87,17 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "MatchStats": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "OAuthCallback": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "PlayerStats": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -149,6 +159,22 @@
         {
           "category": "function",
           "resourceName": "OAuthCallback"
+        }
+      ]
+    },
+    "AMPLIFY_function_PlayerStats_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PlayerStats"
+        }
+      ]
+    },
+    "AMPLIFY_function_PlayerStats_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PlayerStats"
         }
       ]
     },

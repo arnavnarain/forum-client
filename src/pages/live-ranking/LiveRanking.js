@@ -9,7 +9,7 @@ var AWS = require('aws-sdk');
 const LiveRanking = () => {
   const [data, setData] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null); // State to track the selected player
-  const [isOpen, setIsOpen] = useState(true); // State to track the modal's visibility
+  const [isOpen, setIsOpen] = useState(false); // State to track the modal's visibility
 
   const accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID.replace(/['"]+/g, '');
   const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY.replace(/['"]+/g, '');
@@ -17,7 +17,7 @@ const LiveRanking = () => {
   AWS.config.update({ region: 'us-east-1' });
 
  
-  function MyTable({ columns, data, onRowClick }) {
+  function MyTable({ columns, data, onRowClick, setIsOpen }) {
     const {
       getTableProps,
       getTableBodyProps,
@@ -71,7 +71,10 @@ const LiveRanking = () => {
               <tr
                 {...row.getRowProps()}
                 style={rowStyle}
-                onClick={() => onRowClick(row.original.Name)} // Pass the player's name when row is clicked
+                onClick={() => {
+                  onRowClick(row.original.id);
+                  setIsOpen(true);
+                }}
               >
                 {row.cells.map((cell) => (
                   <td
@@ -125,7 +128,11 @@ const LiveRanking = () => {
       <Heading className="heading">ATP Live Rankings</Heading>
       {data && (
         <>
-          <MyTable columns={columns} data={data} onRowClick={() => {setIsOpen(true)}} />
+          <MyTable columns={columns} data={data}           onRowClick={(playerName) => {
+            setSelectedPlayer(playerName);
+            setIsOpen(true);
+          }}
+          setIsOpen={setIsOpen} />
         </>
       )}
       {isOpen && <Modal setIsOpen={setIsOpen} playerId={selectedPlayer} />}
