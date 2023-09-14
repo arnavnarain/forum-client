@@ -27,7 +27,9 @@ const Modal = ({ setIsOpen, playerId }) => {
                 console.log(err);
             } else {
                 const body = JSON.parse(data.Payload);
-                setPlayerData(body.data['0']);
+                setPlayerData(body.data['player_data']['0']);
+                console.log(body.data)
+                console.log(body.data['player_data'])
             }
         });
     }
