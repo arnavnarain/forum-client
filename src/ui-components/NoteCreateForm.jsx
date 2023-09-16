@@ -199,7 +199,6 @@ export default function NoteCreateForm(props) {
     upvotes: [],
     downvotes: [],
     comments: [],
-    users: [],
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
@@ -210,7 +209,6 @@ export default function NoteCreateForm(props) {
   const [upvotes, setUpvotes] = React.useState(initialValues.upvotes);
   const [downvotes, setDownvotes] = React.useState(initialValues.downvotes);
   const [comments, setComments] = React.useState(initialValues.comments);
-  const [users, setUsers] = React.useState(initialValues.users);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
@@ -223,8 +221,6 @@ export default function NoteCreateForm(props) {
     setCurrentDownvotesValue("");
     setComments(initialValues.comments);
     setCurrentCommentsValue("");
-    setUsers(initialValues.users);
-    setCurrentUsersValue("");
     setErrors({});
   };
   const [currentUpvotesValue, setCurrentUpvotesValue] = React.useState("");
@@ -233,8 +229,6 @@ export default function NoteCreateForm(props) {
   const downvotesRef = React.createRef();
   const [currentCommentsValue, setCurrentCommentsValue] = React.useState("");
   const commentsRef = React.createRef();
-  const [currentUsersValue, setCurrentUsersValue] = React.useState("");
-  const usersRef = React.createRef();
   const validations = {
     name: [{ type: "Required" }],
     description: [],
@@ -243,7 +237,6 @@ export default function NoteCreateForm(props) {
     upvotes: [{ type: "Required" }],
     downvotes: [{ type: "Required" }],
     comments: [{ type: "Required" }],
-    users: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -278,7 +271,6 @@ export default function NoteCreateForm(props) {
           upvotes,
           downvotes,
           comments,
-          users,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -340,7 +332,6 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
-              users,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -371,7 +362,6 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
-              users,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -402,7 +392,6 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
-              users,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -433,7 +422,6 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
-              users,
             };
             const result = onChange(modelFields);
             value = result?.ownerId ?? value;
@@ -460,7 +448,6 @@ export default function NoteCreateForm(props) {
               upvotes: values,
               downvotes,
               comments,
-              users,
             };
             const result = onChange(modelFields);
             values = result?.upvotes ?? values;
@@ -509,7 +496,6 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes: values,
               comments,
-              users,
             };
             const result = onChange(modelFields);
             values = result?.downvotes ?? values;
@@ -558,7 +544,6 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments: values,
-              users,
             };
             const result = onChange(modelFields);
             values = result?.comments ?? values;
@@ -593,55 +578,6 @@ export default function NoteCreateForm(props) {
           ref={commentsRef}
           labelHidden={true}
           {...getOverrideProps(overrides, "comments")}
-        ></TextField>
-      </ArrayField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              name,
-              description,
-              image,
-              ownerId,
-              upvotes,
-              downvotes,
-              comments,
-              users: values,
-            };
-            const result = onChange(modelFields);
-            values = result?.users ?? values;
-          }
-          setUsers(values);
-          setCurrentUsersValue("");
-        }}
-        currentFieldValue={currentUsersValue}
-        label={"Users"}
-        items={users}
-        hasError={errors?.users?.hasError}
-        errorMessage={errors?.users?.errorMessage}
-        setFieldValue={setCurrentUsersValue}
-        inputFieldRef={usersRef}
-        defaultFieldValue={""}
-      >
-        <TextField
-          label="Users"
-          isRequired={true}
-          isReadOnly={false}
-          value={currentUsersValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.users?.hasError) {
-              runValidationTasks("users", value);
-            }
-            setCurrentUsersValue(value);
-          }}
-          onBlur={() => runValidationTasks("users", currentUsersValue)}
-          errorMessage={errors.users?.errorMessage}
-          hasError={errors.users?.hasError}
-          ref={usersRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "users")}
         ></TextField>
       </ArrayField>
       <Flex

@@ -125,10 +125,10 @@ const LiveRanking = () => {
 
   return (
     <center>
-      <Heading className="heading">ATP Live Rankings</Heading>
+      <Heading className="alternate-heading">ATP Live Rankings</Heading>
       {data && (
         <>
-          <MyTable columns={columns} data={data}           onRowClick={(playerName) => {
+          <MyTable columns={columns} data={data} onRowClick={(playerName) => {
             setSelectedPlayer(playerName);
             setIsOpen(true);
           }}

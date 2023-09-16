@@ -17,7 +17,7 @@
 
 .mainContainer { 
     cursor: pointer;
-
+    text-align: center !important;
 }
 
 .voteCol {
@@ -30,6 +30,7 @@
         height: 52px;
         margin-bottom: 0.5rem;
     }
+    text-align: center !important;
 
     .voteIcon:hover {
         cursor: pointer;

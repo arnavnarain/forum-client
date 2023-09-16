@@ -36,8 +36,6 @@ const MatchModal = ({ setIsOpen, matchId }) => {
         getLiveRankings(matchId);
     }, []);
 
-
-
     return (
         <>
             <div className={styles.darkBG} onClick={() => setIsOpen(false)} />

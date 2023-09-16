@@ -2,11 +2,5 @@
   "AppSyncApiName": "forumclient",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2023-04-18T18:55:02.472Z",
-  "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": [
-      "authforumclient0b407399",
-      "Outputs.UserPoolId"
-    ]
-  }
+  "AuthModeLastUpdated": "2023-09-15T22:52:36.781Z"
 }

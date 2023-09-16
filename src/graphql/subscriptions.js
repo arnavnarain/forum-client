@@ -1,6 +1,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateComments = /* GraphQL */ `
+  subscription OnCreateComments($filter: ModelSubscriptionCommentsFilterInput) {
+    onCreateComments(filter: $filter) {
+      id
+      userId
+      text
+      userProfilePictureUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateComments = /* GraphQL */ `
+  subscription OnUpdateComments($filter: ModelSubscriptionCommentsFilterInput) {
+    onUpdateComments(filter: $filter) {
+      id
+      userId
+      text
+      userProfilePictureUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteComments = /* GraphQL */ `
+  subscription OnDeleteComments($filter: ModelSubscriptionCommentsFilterInput) {
+    onDeleteComments(filter: $filter) {
+      id
+      userId
+      text
+      userProfilePictureUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateNote = /* GraphQL */ `
   subscription OnCreateNote($filter: ModelSubscriptionNoteFilterInput) {
     onCreateNote(filter: $filter) {
@@ -12,7 +48,6 @@ export const onCreateNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
-      users
       createdAt
       updatedAt
     }
@@ -29,7 +64,6 @@ export const onUpdateNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
-      users
       createdAt
       updatedAt
     }
@@ -46,7 +80,6 @@ export const onDeleteNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
-      users
       createdAt
       updatedAt
     }

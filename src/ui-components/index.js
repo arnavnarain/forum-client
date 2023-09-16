@@ -5,5 +5,7 @@
  **************************************************************************/
 
 export { default as studioTheme } from "./studioTheme";
+export { default as CommentsCreateForm } from "./CommentsCreateForm";
+export { default as CommentsUpdateForm } from "./CommentsUpdateForm";
 export { default as NoteCreateForm } from "./NoteCreateForm";
 export { default as NoteUpdateForm } from "./NoteUpdateForm";

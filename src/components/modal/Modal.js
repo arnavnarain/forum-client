@@ -28,8 +28,6 @@ const Modal = ({ setIsOpen, playerId }) => {
             } else {
                 const body = JSON.parse(data.Payload);
                 setPlayerData(body.data['player_data']['0']);
-                console.log(body.data)
-                console.log(body.data['player_data'])
             }
         });
     }

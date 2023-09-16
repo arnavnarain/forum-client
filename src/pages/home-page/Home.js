@@ -106,7 +106,11 @@ const Home = ( props ) => {
         return note;
       })
     );
-    setNotes(notesFromAPI);
+    if (notesFromAPI !== undefined) {
+      console.log(notesFromAPI);
+      setNotes(notesFromAPI);
+     }
+
   }
 
   return (
@@ -146,7 +150,7 @@ const Home = ( props ) => {
         <center>
           <View>
             {notes.map((note) => (
-              <ThreadCard note={note} compressed={true} />
+              <ThreadCard key={note.id} note={note} compressed={true} />
             ))}
           </View>
         </center>

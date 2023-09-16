@@ -5,19 +5,37 @@ import { Auth, Storage } from 'aws-amplify';
 import { Image, Flex } from '@aws-amplify/ui-react';
 
 import './comment.scss';
+import { getComments } from '../../graphql/queries';
+import { API } from 'aws-amplify';
 
-const Comment = ({ username, content }) => {
+const Comment = (props) => {
+    const { id } = props
 
-    const [profileImage, setProfileImage] = useState(null);
+    const [picture, setPicture] = useState('')
+    const [username, setUsername] = useState('TEST')
+    const [content, setContent] = useState('')
+    const [profileImage, setProfileImage] = useState('')
+
+    async function fetchComment() { 
+        if (id !== undefined) {
+            const { data } = await API.graphql({ query: getComments, variables: { id: id } });
+            console.log(data);
+            setUsername(data.getComments.userId);
+            console.log(data.getComments.userId);
+            setContent(data.getComments.text);
+            setProfileImage(data.getComments.userProfilePictureUrl);
+        }
+    }
 
     async function fetchProfilePicture() {
-        const profileImage = await Storage.get(Auth.user.attributes.picture);
-        setProfileImage(profileImage);
+        setPicture(await Storage.get(profileImage));
     }
 
     useEffect(() => {
+        fetchComment();
         fetchProfilePicture();
-    })
+        console.log(username);
+    }, [username])
 
     return (
         <CommentContainer>
@@ -26,7 +44,7 @@ const Comment = ({ username, content }) => {
                 {profileImage !== null &&
                     <div style={{alignItems: "column", justifyContent: "center"}}>
                         <Image
-                            src={profileImage}
+                            src={picture}
                             alt="Profile picture"
                             width="50px"
                             height="50px"
@@ -37,7 +55,7 @@ const Comment = ({ username, content }) => {
                     </div>
                 }
                 </div>
-                <BodyText> {content} </BodyText>
+                <BodyText className="content"> {content} </BodyText>
             </Flex>
         </CommentContainer>
     )
