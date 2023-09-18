@@ -7,27 +7,30 @@ import { Image, Flex } from '@aws-amplify/ui-react';
 import './comment.scss';
 import { getComments } from '../../graphql/queries';
 import { API } from 'aws-amplify';
-
 const Comment = (props) => {
-    const { id } = props
+    const { id } = props;
 
-    const [picture, setPicture] = useState('')
-    const [username, setUsername] = useState('TEST')
-    const [content, setContent] = useState('')
-    const [profileImage, setProfileImage] = useState('')
+    const [picture, setPicture] = useState('');
+    const [username, setUsername] = useState('TEST');
+    const [content, setContent] = useState('');
+    const [profileImage, setProfileImage] = useState('default-profile-picture.png');
 
-    async function fetchComment() { 
+    async function fetchComment() {
         if (id !== undefined) {
             const { data } = await API.graphql({ query: getComments, variables: { id: id } });
             console.log(data);
             setUsername(data.getComments.userId);
             console.log(data.getComments.userId);
             setContent(data.getComments.text);
-            setProfileImage(data.getComments.userProfilePictureUrl);
+            if (data.getComments.userProfilePictureUrl) {
+                setProfileImage(data.getComments.userProfilePictureUrl);
+            }
         }
+        console.log(username);
     }
 
     async function fetchProfilePicture() {
+        console.log(profileImage);
         setPicture(await Storage.get(profileImage));
     }
 
@@ -35,30 +38,30 @@ const Comment = (props) => {
         fetchComment();
         fetchProfilePicture();
         console.log(username);
-    }, [username])
+    }, [username]);
 
     return (
         <CommentContainer>
-            <Flex direction="row" className="flexColumn">
-                <div style={{marginRight: "1rem"}}>
-                {profileImage !== null &&
-                    <div style={{alignItems: "column", justifyContent: "center"}}>
+            <Flex direction="row" className="commentContainer">
+                <div className="profileImageContainer">
+                    {picture && (
                         <Image
                             src={picture}
                             alt="Profile picture"
                             width="50px"
                             height="50px"
                             objectFit="cover"
-                            style={{ borderRadius: "50%", minWidth: "50px" }}
+                            style={{ borderRadius: "50%" }}
                         />
-                        <BodyText className="usernameLine">{username} </BodyText>
-                    </div>
-                }
+                    )}
+                    <BodyText className="usernameLine">{username} </BodyText>
                 </div>
-                <BodyText className="content"> {content} </BodyText>
+                <div className="commentContentContainer">
+                    <BodyText className="content"> {content} </BodyText>
+                </div>
             </Flex>
         </CommentContainer>
-    )
-}
+    );
+};
 
-export { Comment } 
+export { Comment };

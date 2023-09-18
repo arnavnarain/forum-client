@@ -97,6 +97,14 @@ const Home = ( props ) => {
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
+
+    // Sort the notes by createdAt in descending order (most recent first)
+    notesFromAPI.sort((a, b) => {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      return dateB - dateA;
+    });
+
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
@@ -106,11 +114,11 @@ const Home = ( props ) => {
         return note;
       })
     );
+
     if (notesFromAPI !== undefined) {
       console.log(notesFromAPI);
       setNotes(notesFromAPI);
-     }
-
+    }
   }
 
   return (
