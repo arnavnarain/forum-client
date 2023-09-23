@@ -43,6 +43,7 @@ export const getNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }
@@ -64,6 +65,7 @@ export const listNotes = /* GraphQL */ `
         upvotes
         downvotes
         comments
+        created_date
         createdAt
         updatedAt
       }

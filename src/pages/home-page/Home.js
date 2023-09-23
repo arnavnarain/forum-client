@@ -73,7 +73,8 @@ const Home = ( props ) => {
       ownerId: username,
       upvotes: [],
       downvotes: [],
-      comments: []
+      comments: [],
+      created_date: new Date().toISOString()
     };
     if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
@@ -100,8 +101,8 @@ const Home = ( props ) => {
 
     // Sort the notes by createdAt in descending order (most recent first)
     notesFromAPI.sort((a, b) => {
-      const dateA = new Date(a.createdAt);
-      const dateB = new Date(b.createdAt);
+      const dateA = new Date(a.created_date);
+      const dateB = new Date(b.created_date);
       return dateB - dateA;
     });
 

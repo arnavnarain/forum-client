@@ -199,6 +199,7 @@ export default function NoteCreateForm(props) {
     upvotes: [],
     downvotes: [],
     comments: [],
+    created_date: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
@@ -209,6 +210,9 @@ export default function NoteCreateForm(props) {
   const [upvotes, setUpvotes] = React.useState(initialValues.upvotes);
   const [downvotes, setDownvotes] = React.useState(initialValues.downvotes);
   const [comments, setComments] = React.useState(initialValues.comments);
+  const [created_date, setCreated_date] = React.useState(
+    initialValues.created_date
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
@@ -221,6 +225,7 @@ export default function NoteCreateForm(props) {
     setCurrentDownvotesValue("");
     setComments(initialValues.comments);
     setCurrentCommentsValue("");
+    setCreated_date(initialValues.created_date);
     setErrors({});
   };
   const [currentUpvotesValue, setCurrentUpvotesValue] = React.useState("");
@@ -237,6 +242,7 @@ export default function NoteCreateForm(props) {
     upvotes: [{ type: "Required" }],
     downvotes: [{ type: "Required" }],
     comments: [{ type: "Required" }],
+    created_date: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -255,6 +261,23 @@ export default function NoteCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -271,6 +294,7 @@ export default function NoteCreateForm(props) {
           upvotes,
           downvotes,
           comments,
+          created_date,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -332,6 +356,7 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
+              created_date,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -362,6 +387,7 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
+              created_date,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -392,6 +418,7 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
+              created_date,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -422,6 +449,7 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments,
+              created_date,
             };
             const result = onChange(modelFields);
             value = result?.ownerId ?? value;
@@ -448,6 +476,7 @@ export default function NoteCreateForm(props) {
               upvotes: values,
               downvotes,
               comments,
+              created_date,
             };
             const result = onChange(modelFields);
             values = result?.upvotes ?? values;
@@ -496,6 +525,7 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes: values,
               comments,
+              created_date,
             };
             const result = onChange(modelFields);
             values = result?.downvotes ?? values;
@@ -544,6 +574,7 @@ export default function NoteCreateForm(props) {
               upvotes,
               downvotes,
               comments: values,
+              created_date,
             };
             const result = onChange(modelFields);
             values = result?.comments ?? values;
@@ -580,6 +611,39 @@ export default function NoteCreateForm(props) {
           {...getOverrideProps(overrides, "comments")}
         ></TextField>
       </ArrayField>
+      <TextField
+        label="Created date"
+        isRequired={false}
+        isReadOnly={false}
+        type="datetime-local"
+        value={created_date && convertToLocal(new Date(created_date))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              image,
+              ownerId,
+              upvotes,
+              downvotes,
+              comments,
+              created_date: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.created_date ?? value;
+          }
+          if (errors.created_date?.hasError) {
+            runValidationTasks("created_date", value);
+          }
+          setCreated_date(value);
+        }}
+        onBlur={() => runValidationTasks("created_date", created_date)}
+        errorMessage={errors.created_date?.errorMessage}
+        hasError={errors.created_date?.hasError}
+        {...getOverrideProps(overrides, "created_date")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

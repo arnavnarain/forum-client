@@ -17,7 +17,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 const ThreadCard = (props) => {
     const { note, compressed } = props;
-    const { id, name: title, description: content, ownerId, createdAt, upvotes, downvotes } = note;
+    console.log(note);
+    const { id, name: title, description: content, ownerId, created_date:createdAt, upvotes, downvotes } = note;
+    console.log(createdAt);
 
     var AWS = require('aws-sdk')
 
@@ -103,7 +105,6 @@ const ThreadCard = (props) => {
             console.log(error);
         }
     }
-
     return (
         <MainContainer className="mainContainer">
             <div className="voteCol">
@@ -118,7 +119,6 @@ const ThreadCard = (props) => {
                     {note.image && (
                         <Image
                             src={note.image}
-                            alt={`No image for ${title}`}
                             style={{ width: "100%", height: "auto" }} />
                     )}
                 </div>

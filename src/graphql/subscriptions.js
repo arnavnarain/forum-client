@@ -48,6 +48,7 @@ export const onCreateNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }
@@ -64,6 +65,7 @@ export const onUpdateNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }
@@ -80,6 +82,7 @@ export const onDeleteNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }

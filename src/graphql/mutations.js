@@ -60,6 +60,7 @@ export const createNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }
@@ -79,6 +80,7 @@ export const updateNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }
@@ -98,6 +100,7 @@ export const deleteNote = /* GraphQL */ `
       upvotes
       downvotes
       comments
+      created_date
       createdAt
       updatedAt
     }
